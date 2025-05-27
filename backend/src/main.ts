@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { CustomExceptionFilter } from './presentation/exception-filter/CustomExceptionFilter';
+import { CustomExceptionFilter } from './exception-middleware/CustomExceptionFilter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,8 +9,8 @@ async function bootstrap() {
   // Activate swagger by debugging
   if(process.env.NODE_ENV === 'development'){
     const config = new DocumentBuilder()
-      .setTitle("Klaus")
-      .setDescription("API description")
+      .setTitle("ArchAi")
+      .setDescription("API Endpoint description")
       .setVersion("1.0")
       .build();
 

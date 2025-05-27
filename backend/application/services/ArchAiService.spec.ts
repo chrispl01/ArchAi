@@ -8,7 +8,7 @@ describe('ArchAiService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [ArchAiService,
         {
-          provide: 'IApiCaller',
+          provide: 'IAiApiCaller',
           useValue: {
             call: jest.fn()
           }

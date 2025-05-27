@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ApiCaller } from './ApiCaller';
+import { AiApiCaller } from './AiApiCaller';
 
-describe('ApiCaller', () => {
-  let provider: ApiCaller;
+describe('AiApiCaller', () => {
+  let provider: AiApiCaller;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ApiCaller],
+      providers: [AiApiCaller],
     }).compile();
 
-    provider = module.get<ApiCaller>(ApiCaller);
+    provider = module.get<AiApiCaller>(AiApiCaller);
   });
 
   it('should be defined', () => {

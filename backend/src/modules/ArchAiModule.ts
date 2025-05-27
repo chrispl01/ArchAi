@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ArchAiService } from '../../application/services/ArchAiService'
-import { ApiCaller } from '../../infrastructure/ApiCaller/ApiCaller';
+import { AiApiCaller } from 'infrastructure/ApiCaller/AiApiCaller';
 import { ArchAiController } from '../controller/ArchAi/ArchAiController';
 
 @Module({
@@ -8,8 +8,8 @@ import { ArchAiController } from '../controller/ArchAi/ArchAiController';
   providers: [
     ArchAiService,
     {
-      provide: 'IApiCaller',
-      useClass: ApiCaller,
+      provide: 'IAiApiCaller',
+      useClass: AiApiCaller,
     },
   ],
 })

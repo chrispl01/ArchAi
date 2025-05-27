@@ -11,7 +11,7 @@ describe('ArchAiController', () => {
       providers: [
         ArchAiService,
         {
-          provide: 'IApiCaller',
+          provide: 'IAiApiCaller',
           useValue: {
             call: jest.fn(),
           },

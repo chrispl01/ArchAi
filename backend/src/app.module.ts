@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ArchAiModule } from './presentation/modules/ArchAiModule';
+import { ArchAiModule } from 'src/modules/ArchAiModule';
 
 @Module({
   imports: [ArchAiModule],

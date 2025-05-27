@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { CustomExceptionFilter } from './presentation/exception-filter/CustomExceptionFilter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,6 +18,9 @@ async function bootstrap() {
     SwaggerModule.setup('api', app, document);
   }
 
+
+  app.useGlobalFilters(new CustomExceptionFilter());
+  
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

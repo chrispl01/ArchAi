@@ -5,7 +5,7 @@ import { ArchAiService } from '../../../application/services/ArchAiService';
 export class ArchAiController {
     constructor(private readonly openAiService: ArchAiService) {}
 
-    @Get('klaus')
+    @Get('generateArchitecture')
     async getExample(){
         return await this.openAiService.getResponse();
     }

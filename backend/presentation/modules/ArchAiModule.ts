@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ArchAiService } from '../../application/services/ArchAiService'
-import { ApiCaller } from 'infrastructure/ApiCaller/ApiCaller';
-import { ArchAiController } from 'presentation/controller/ArchAi/ArchAiController';
+import { ApiCaller } from '../../infrastructure/ApiCaller/ApiCaller';
+import { ArchAiController } from '../controller/ArchAi/ArchAiController';
 
 @Module({
   controllers: [ArchAiController],

@@ -1,4 +1,3 @@
-
 export class Prompt{
-    message: string;
+    prompt: string;
 }

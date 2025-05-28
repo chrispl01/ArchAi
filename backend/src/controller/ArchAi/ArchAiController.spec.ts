@@ -3,26 +3,26 @@ import { ArchAiController } from './ArchAiController';
 import { ArchAiService } from '../../../application/services/ArchAiService';
 
 describe('ArchAiController', () => {
-  let controller: ArchAiController;
+    let controller: ArchAiController;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [ArchAiController],
-      providers: [
-        ArchAiService,
-        {
-          provide: 'IAiApiCaller',
-          useValue: {
-            call: jest.fn(),
-          },
-        },
-      ],
-    }).compile();
+    beforeEach(async () => {
+        const module: TestingModule = await Test.createTestingModule({
+            controllers: [ArchAiController],
+            providers: [
+                ArchAiService,
+                {
+                    provide: 'IAiApiCaller',
+                    useValue: {
+                        call: jest.fn(),
+                    },
+                },
+            ],
+        }).compile();
 
-    controller = module.get<ArchAiController>(ArchAiController);
-  });
+        controller = module.get<ArchAiController>(ArchAiController);
+    });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+    it('should be defined', () => {
+        expect(controller).toBeDefined();
+    });
 });

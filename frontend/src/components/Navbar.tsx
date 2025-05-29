@@ -7,11 +7,12 @@ export default function Navbar() {
 
   const navItems = [
     { name: 'Home', href: '/' },
+    { name: 'Generator', href: '/generator' },
     { name: 'About', href: '/about' },
   ];
 
   return (
-    <nav className="bg-black text-white relative">
+    <nav className="text-white relative animate-slide-in-right-to-left">
       {/* Desktop */}
       <div className="hidden sm:flex items-center h-16 px-8">
         <Link href="/" className="text-2xl font-bold">
@@ -81,7 +82,7 @@ export default function Navbar() {
 
       {/* Mobile Dropdown Menü */}
       {isOpen && (
-        <div className="sm:hidden absolute right-4 top-16 bg-black border border-gray-700 rounded shadow-lg py-2 w-40 z-50">
+        <div className="sm:hidden absolute right-4 top-16 border border-gray-700 rounded shadow-lg py-2 w-40 z-50">
           {navItems.map((item) => (
             <Link
               key={item.name}

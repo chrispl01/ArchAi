@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
 import BackButton from '@/components/BackButton';
@@ -15,7 +15,7 @@ export default function Generator() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (prompt.trim()) {
-      const generatedCode = `resource "aws_instance" "example" {\n  ami           = "ami-12345678"\n  instance_type = "t2.micro"\n  tags = {\n    Name = "${prompt}"\n  }\n}`;
+      const generatedCode = `resource "aws_instance" "example" {\n  ami           = "ami-12345678"\n  instance_type = "t2.micro"\n  tags = {\n    Name = "asd"\n  }\n}`;
       setCode(generatedCode);
       setSubmitted(true);
     }
@@ -29,6 +29,18 @@ export default function Generator() {
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
+  };
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setPrompt(e.target.value);
+
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto'; // reset height
+      const maxHeight = 6 * 24; // 5 Zeilen x 24px Höhe (ungefähr)
+      textareaRef.current.style.height =
+        Math.min(textareaRef.current.scrollHeight, maxHeight) + 'px';
+    }
   };
 
   return (
@@ -46,14 +58,17 @@ export default function Generator() {
             onSubmit={handleSubmit}
             className="flex flex-col items-center w-3xl"
           >
-            <input
-              type="text"
+            <textarea
+              ref={textareaRef}
               value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              placeholder="Gib deinen Prompt ein..."
-              className="w-full px-6 py-4 mb-6 text-lg rounded-4xl border-2 bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              onChange={handleChange}
+              placeholder="Describe your cloud architecture..."
+              rows={1}
+              className="w-full px-6 py-4 mb-6 text-lg rounded-4xl border-2 focus:outline-none focus:ring-2 focus:ring-gray-500 resize-none"
+              style={{ maxHeight: '144px', overflowY: 'auto' }}
               required
             />
+
             <button className="mt-6 text-lg border-1 border-gray-100 px-4 py-2 rounded-4xl hover:bg-gray-600 duration-100 hover:scale-105 cursor-pointer w-40">
               generate!
             </button>
@@ -63,7 +78,8 @@ export default function Generator() {
         {submitted && (
           <div className="w-full max-w-4xl">
             <div
-              className="w-full px-6 py-4 mb-8 text-sm rounded-xl border-1 border-gray-600 bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className="w-full px-6 py-4 mb-8 text-sm rounded-4xl border-1 focus:outline-none focus:ring-2 focus:ring-gray-500 whitespace-pre-wrap overflow-auto"
+              style={{ maxHeight: '144px' }} // max. Höhe wie Textarea
               aria-readonly="true"
             >
               {prompt}
@@ -89,9 +105,12 @@ export default function Generator() {
                 />
               </div>
 
-              <div className='flex flex-row w-full justify-between'>
+              <div className="flex flex-row w-full justify-between">
                 <button
-                  onClick={() => setSubmitted(false)}
+                  onClick={() => {
+                    setSubmitted(false);
+                    setPrompt(''); 
+                  }}
                   className="my-8 font-semibold text-sm border-1 border-gray-100 px-4 py-2 rounded-4xl hover:bg-gray-600 duration-100 hover:scale-105 cursor-pointer w-40"
                 >
                   Reload

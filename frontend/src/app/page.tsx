@@ -7,22 +7,24 @@ export default function Home() {
       <h1 className="text-3xl sm:text-5xl font-bold mb-4">ArchAi</h1>
       <p className="sm:text-md md:text-lg w-[70%] mb-1">
         ArchAi is an platform that uses llm for automated generation of modern
-        cloud architectures
+        cloud architectures with terraform.
       </p>
       <p className="sm:text-md md:text-md mb-8">
         — fast, efficient, and scalable
       </p>
-      <div className='flex flex-row gap-8'>
-        <button className="bg-gray-900 border-1 border-gray-100 font-semibold px-4 py-2 rounded-4xl hover:bg-gray-600 duration-100 hover:scale-125 cursor-pointer w-40">
-          <Link href="/generator" passHref>
-            Try it!
-          </Link>
-        </button>
-        <button className="text-sm border-1 border-gray-100 px-4 py-2 rounded-4xl hover:bg-gray-600 duration-100 hover:scale-105 cursor-pointer w-40">
-          <Link href="/about" passHref>
-            Learn more!
-          </Link>
-        </button>
+      <div className="flex flex-row gap-8">
+        <Link
+          href="/generator"
+          className="bg-gray-900 border border-gray-100 font-semibold px-4 py-2 rounded-4xl hover:bg-gray-600 duration-100 hover:scale-125 cursor-pointer w-40 inline-flex justify-center items-center text-center"
+        >
+          Try it!
+        </Link>
+        <Link
+          href="/about"
+          className="text-sm border-1 border-gray-100 px-4 py-2 rounded-4xl hover:bg-gray-600 duration-100 hover:scale-105 cursor-pointer w-40 flex justify-center items-center"
+        >
+          Learn more!
+        </Link>
       </div>
     </div>
   );

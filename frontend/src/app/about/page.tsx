@@ -1,10 +1,16 @@
+'use client';
+import BackButton from "@/components/BackButton";
+
 export default function About() {
   return (
-    <main className="flex-col flex justify-center w-full min-h-[80vh] text-left px-4 sm:px-4 md:px-8 lg:px-24 xl:px-32 animate-slide-in-right-to-left">
+    <div className="flex-col flex justify-center w-full min-h-[80vh] text-left px-4 sm:px-4 md:px-8 lg:px-24 xl:px-32 animate-slide-in-right-to-left">
+      <div className="my-10">
+        <BackButton/>
+      </div>
+
       <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-left">
         About ArchAi
       </h1>
-
       <section className="mb-6">
         <h2 className="text-xl sm:text-2xl font-semibold mb-2 text-left">
           What is ArchAi?
@@ -31,10 +37,10 @@ export default function About() {
         </h2>
         <p className="text-base sm:text-lg leading-relaxed">
           This platform is developed as part of a university project, aimed at
-          exploring the intersection of software engineering, AI, and cloud architectures
-          technologies.
+          exploring the intersection of software engineering, AI, and cloud
+          architectures technologies.
         </p>
       </section>
-    </main>
+    </div>
   );
 }

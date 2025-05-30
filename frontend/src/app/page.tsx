@@ -12,11 +12,18 @@ export default function Home() {
       <p className="sm:text-md md:text-md mb-8">
         — fast, efficient, and scalable
       </p>
-      <button className="bg-gray-900 border-1 border-gray-100 font-semibold px-8 py-2 rounded-4xl hover:bg-gray-600 duration-100 hover:scale-105 cursor-pointer w-30">
-        <Link href="/generator" passHref>
-          Try it!
-        </Link>
-      </button>
+      <div className='flex flex-row gap-8'>
+        <button className="bg-gray-900 border-1 border-gray-100 font-semibold px-4 py-2 rounded-4xl hover:bg-gray-600 duration-100 hover:scale-125 cursor-pointer w-40">
+          <Link href="/generator" passHref>
+            Try it!
+          </Link>
+        </button>
+        <button className="text-sm border-1 border-gray-100 px-4 py-2 rounded-4xl hover:bg-gray-600 duration-100 hover:scale-105 cursor-pointer w-40">
+          <Link href="/about" passHref>
+            Learn more!
+          </Link>
+        </button>
+      </div>
     </div>
   );
 }

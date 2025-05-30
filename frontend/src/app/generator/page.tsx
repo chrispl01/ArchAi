@@ -3,6 +3,7 @@ import { useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
 import BackButton from '@/components/BackButton';
+import { sub } from 'framer-motion/client';
 
 export default function Generator() {
   const [prompt, setPrompt] = useState('');
@@ -32,7 +33,7 @@ export default function Generator() {
 
   return (
     <>
-      <BackButton></BackButton>
+      {!submitted && <BackButton></BackButton>}
       <div className="flex flex-col justify-center items-center w-full">
         {!submitted && (
           <h1 className="text-3xl font-bold mb-12">
@@ -88,12 +89,20 @@ export default function Generator() {
                 />
               </div>
 
-              <button
-                onClick={downloadCode}
-                className="ml-auto my-8 font-semibold text-sm border-1 border-gray-100 px-4 py-2 rounded-4xl hover:bg-gray-600 duration-100 hover:scale-105 cursor-pointer w-40"
-              >
-                Download .tf
-              </button>
+              <div className='flex flex-row w-full justify-between'>
+                <button
+                  onClick={() => setSubmitted(false)}
+                  className="my-8 font-semibold text-sm border-1 border-gray-100 px-4 py-2 rounded-4xl hover:bg-gray-600 duration-100 hover:scale-105 cursor-pointer w-40"
+                >
+                  Reload
+                </button>
+                <button
+                  onClick={downloadCode}
+                  className="my-8 font-semibold text-sm border-1 border-gray-100 px-4 py-2 rounded-4xl hover:bg-gray-600 duration-100 hover:scale-105 cursor-pointer w-40"
+                >
+                  Download .tf
+                </button>
+              </div>
             </div>
           </div>
         )}

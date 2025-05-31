@@ -1,12 +1,11 @@
 'use client';
-import BackButton from '@/components/BackButton';
+import { BackButton } from '@/components/BackButton';
 
 export default function About() {
   return (
     <>
-      <BackButton/>
+      <BackButton />
       <div className="flex-col flex justify-center w-full min-h-[80vh] text-left px-4 sm:px-4 md:px-8 lg:px-24 xl:px-32 animate-slide-in-right-to-left">
-
         <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-left">
           About ArchAi
         </h1>

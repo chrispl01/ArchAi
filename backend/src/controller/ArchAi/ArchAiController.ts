@@ -12,7 +12,7 @@ export class ArchAiController {
     constructor(private readonly aiService: ArchAiService) {}
 
     // Post Request
-    @Get('getCompletion')
+    @Post('getCompletion')
     async getExample(@Body() prompt: Prompt) {
         return await this.aiService.GetCompletion(prompt);
     }

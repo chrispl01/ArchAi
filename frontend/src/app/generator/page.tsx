@@ -2,28 +2,40 @@
 import { useState, useRef } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
-import BackButton from '@/components/BackButton';
-import { sub } from 'framer-motion/client';
+import { BackButton } from '@/components/BackButton';
+import { Prompt } from '@/models/dtos/Prompt';
+import { Completion } from '@/models/dtos/Completion';
+import { getCode } from '@/controller/GeneratorController';
+import ErrorModal from '@/components/ErrorModal';
+import { Loadingscreen } from '@/components/LoadingScreen';
+import { loadComponents } from 'next/dist/server/load-components';
 
 export default function Generator() {
-  const [prompt, setPrompt] = useState('');
+  const [prompt, setPrompt] = useState<Prompt>(new Prompt());
   const [submitted, setSubmitted] = useState(false);
-  const [code, setCode] = useState(
-    `# Hier wird dein Terraform-Code generiert\n`,
-  );
+  const [code, setCode] = useState<Completion>(new Completion());
+  const [errormodal, setError] = useState('');
+  const [loadingscreen, setLoadingscreen] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (prompt.trim()) {
-      const generatedCode = `resource "aws_instance" "example" {\n  ami           = "ami-12345678"\n  instance_type = "t2.micro"\n  tags = {\n    Name = "asd"\n  }\n}`;
-      setCode(generatedCode);
-      setSubmitted(true);
+    setLoadingscreen(true);
+
+    if (prompt.prompt.trim()) {
+      try {
+        const generatedCode = await getCode(prompt);
+        setSubmitted(true);
+        setCode(generatedCode);
+      } catch (error: any) {
+        setError(error.message);
+      }
+      setLoadingscreen(false);
     }
   };
 
   const downloadCode = () => {
     const element = document.createElement('a');
-    const file = new Blob([code], { type: 'text/plain' });
+    const file = new Blob([code.message], { type: 'text/plain' });
     element.href = URL.createObjectURL(file);
     element.download = 'main.tf';
     document.body.appendChild(element);
@@ -33,7 +45,7 @@ export default function Generator() {
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setPrompt(e.target.value);
+    setPrompt({ prompt: e.target.value });
 
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto'; // reset height
@@ -45,6 +57,13 @@ export default function Generator() {
 
   return (
     <>
+
+    {loadingscreen &&
+    <Loadingscreen/>}
+      {errormodal && (
+        <ErrorModal message={errormodal} onClose={() => setError('')} />
+      )}
+
       {!submitted && <BackButton></BackButton>}
       <div className="flex flex-col justify-center items-center w-full">
         {!submitted && (
@@ -60,7 +79,7 @@ export default function Generator() {
           >
             <textarea
               ref={textareaRef}
-              value={prompt}
+              value={prompt.prompt}
               onChange={handleChange}
               placeholder="Describe your cloud architecture..."
               rows={1}
@@ -82,19 +101,19 @@ export default function Generator() {
               style={{ maxHeight: '144px' }} // max. Höhe wie Textarea
               aria-readonly="true"
             >
-              {prompt}
+              {prompt.prompt}
             </div>
 
             <div className="flex flex-col items-center w-full m-auto">
               <div
-                className="w-full bg-gray-800 rounded-xl shadow-lg overflow-auto text-sm border-1 border-gray-600"
-                style={{ minHeight: '400px', maxHeight: '60vh' }}
-              >
+                className="w-full bg-gray-800 rounded-xl shadow-lg overflow-auto text-sm border-1 border-gray-600">
                 <CodeMirror
-                  value={code}
-                  height="400px"
+                  value={code.message}
+                  height="600px"
                   extensions={[json()]}
-                  onChange={(value) => setCode(value)}
+                  onChange={(value) =>
+                    setCode((prev) => ({ ...prev, message: value }))
+                  }
                   theme="dark"
                   basicSetup={{
                     lineNumbers: true,
@@ -109,7 +128,7 @@ export default function Generator() {
                 <button
                   onClick={() => {
                     setSubmitted(false);
-                    setPrompt(''); 
+                    setPrompt(new Prompt());
                   }}
                   className="my-8 font-semibold text-sm border-1 border-gray-100 px-4 py-2 rounded-4xl hover:bg-gray-600 duration-100 hover:scale-105 cursor-pointer w-40"
                 >

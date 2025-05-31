@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-export default function BackButton() {
+export const BackButton = () => {
   return (
     <button
       onClick={() => window.history.back()}

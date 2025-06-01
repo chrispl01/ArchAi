@@ -8,7 +8,6 @@ import { Completion } from '@/models/dtos/Completion';
 import { getCode } from '@/controller/GeneratorController';
 import ErrorModal from '@/components/ErrorModal';
 import { Loadingscreen } from '@/components/LoadingScreen';
-import { loadComponents } from 'next/dist/server/load-components';
 
 export default function Generator() {
   const [prompt, setPrompt] = useState<Prompt>(new Prompt());
@@ -26,8 +25,12 @@ export default function Generator() {
         const generatedCode = await getCode(prompt);
         setSubmitted(true);
         setCode(generatedCode);
-      } catch (error: any) {
-        setError(error.message);
+      } catch (error) {
+        if(error instanceof Error){
+          setError(error.message);
+        }else{
+          setError(String(error));
+        }
       }
       setLoadingscreen(false);
     }
@@ -68,7 +71,7 @@ export default function Generator() {
       <div className="flex flex-col justify-center items-center w-full">
         {!submitted && (
           <h1 className="text-3xl font-bold mb-12">
-            Let's generate your terraform cloud architecture...
+            Let&apos;s generate your terraform cloud architecture...
           </h1>
         )}
 
@@ -128,7 +131,6 @@ export default function Generator() {
                 <button
                   onClick={() => {
                     setSubmitted(false);
-                    setPrompt(new Prompt());
                   }}
                   className="my-8 font-semibold text-sm border-1 border-gray-100 px-4 py-2 rounded-4xl hover:bg-gray-600 duration-100 hover:scale-105 cursor-pointer w-40"
                 >

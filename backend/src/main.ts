@@ -23,7 +23,10 @@ async function bootstrap() {
         });
     }
 
+    // Trust nginx proxy for throtller
+    app.getHttpAdapter().getInstance().set('trust proxy', true);
 
+    
     // register globarl middleware
     app.useGlobalFilters(new CustomExceptionFilter());
 

@@ -16,7 +16,7 @@ import { APP_GUARD } from '@nestjs/core';
             throttlers: [
                 {
                     ttl: 86400,
-                    limit: 100,
+                    limit: 1,
                 },
             ],
         }),
@@ -26,7 +26,7 @@ import { APP_GUARD } from '@nestjs/core';
     providers: [
         {
             provide: APP_GUARD,
-            useClass: ThrottlerGuard, // Bindet den Guard global für die App
+            useClass: ThrottlerGuard, // Bind guard globally
         },
     ],
 })

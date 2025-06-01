@@ -23,7 +23,14 @@ export class AiApiCaller implements IAiApiCaller {
                 {
                     model: 'ft:gpt-4.1-mini-2025-04-14:personal:archai:BZj9yJlz',
                     store: false,
-                    messages: [{ role: 'user', content: prompt }],
+                    messages: [
+                        {
+                            role: 'system',
+                            content:
+                                'You are a Terraform expert. Respond only with valid Terraform code and inline comments. Do not include any extra text, explanation, or markdown formatting.',
+                        },
+                        { role: 'user', content: prompt },
+                    ],
                 },
                 {
                     headers: {

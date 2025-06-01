@@ -6,7 +6,7 @@ export default function Home() {
     <div className="flex-col flex justify-center w-full min-h-[80vh] text-left px-4 sm:px-4 md:px-8 lg:px-24 xl:px-32 animate-slide-in-right-to-left">
       <h1 className="text-3xl sm:text-5xl font-bold mb-4">ArchAi</h1>
       <p className="sm:text-md md:text-lg w-[70%] mb-1">
-        ArchAi is an platform that uses llm for automated generation of modern
+        ArchAi is a platform that uses llm for automated generation of modern
         cloud architectures with terraform.
       </p>
       <p className="sm:text-md md:text-md mb-8">

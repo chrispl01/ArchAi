@@ -11,6 +11,7 @@ export async function fetchTerraformCode(prompt: Prompt): Promise<Completion> {
         headers: {
           'Content-Type': 'application/json',
         },
+        timeout: 60000,
       }
     );
 

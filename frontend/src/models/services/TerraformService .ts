@@ -5,7 +5,7 @@ import axios from 'axios';
 export async function fetchTerraformCode(prompt: Prompt): Promise<Completion> {
   try {
     const response = await axios.post<Completion>(
-      'http://archai.chrispl.com/api/ArchAi/getCompletion',
+      'https://archai.chrispl.com/api/ArchAi/getCompletion',
       prompt,
       {
         headers: {

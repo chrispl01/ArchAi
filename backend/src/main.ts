@@ -26,10 +26,9 @@ async function bootstrap() {
     // Trust nginx proxy for throtller
     app.getHttpAdapter().getInstance().set('trust proxy', true);
 
-    
     // register globarl middleware
     app.useGlobalFilters(new CustomExceptionFilter());
 
-    await app.listen(process.env.PORT ?? 5000);
+    await app.listen(5000);
 }
 bootstrap();

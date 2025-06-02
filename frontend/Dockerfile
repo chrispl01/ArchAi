@@ -1,4 +1,4 @@
-# 1. Build stage
+# Build Stage
 FROM node:22.16 AS builder
 WORKDIR /app
 
@@ -8,12 +8,16 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# 2. Runtime stage
+# Runtime Stage
 FROM node:22.16
 WORKDIR /app
 
-COPY --from=builder /app ./
+COPY package*.json ./
+RUN npm install --only=production
+
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+
 EXPOSE 3000
 
-CMD ["npm", "start"]
-
+CMD ["npm", "run", "start"]

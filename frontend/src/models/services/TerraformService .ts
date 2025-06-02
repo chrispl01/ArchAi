@@ -38,7 +38,6 @@ export async function fetchTerraformCode(prompt: Prompt): Promise<Completion> {
       throw new Error('Internal server error occured!');
     }
   }
-
   throw new Error('Error occured! Try again!');
 }
 }

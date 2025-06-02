@@ -6,7 +6,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>
+      <body className='bg-black text-white'>
         <Navbar />
         <main className="mx-4 sm:mx-8 flex min-h-[90vh]">{children}</main>
       </body>

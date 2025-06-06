@@ -1,0 +1,2 @@
+Prompt:
+Set up a multi-region cloud architecture on Azure with Traffic Manager for load balancing and Azure SQL databases for high availability and disaster recovery.

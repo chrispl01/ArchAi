@@ -1,0 +1,2 @@
+Prompt:
+Provision a Kubernetes cluster infrastructure on Azure using managed AKS, integrated monitoring, and automatic scaling.

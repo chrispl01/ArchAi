@@ -1,0 +1,2 @@
+#Prompt 
+# Deploy a serverless application on Google Cloud consisting of Cloud Functions, a Firestore database, and an API Gateway for authentication.

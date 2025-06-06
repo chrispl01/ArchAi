@@ -1,0 +1,2 @@
+Prompt:
+Build a hybrid network on AWS with a VPN gateway, a private VPC, and a connection to an on-premises data center.

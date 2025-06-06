@@ -1,0 +1,2 @@
+Prompt: 
+Automate infrastructure for a multi-tier application on Google Cloud using Compute Engine instances, Cloud Storage for static content, and Identity and Access Management (IAM) for access control.

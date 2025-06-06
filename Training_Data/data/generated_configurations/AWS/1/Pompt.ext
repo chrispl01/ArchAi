@@ -1,0 +1,2 @@
+Prompt:
+Create a scalable web application on AWS with a load balancer, auto scaling group, and a PostgreSQL database in a private subnet.
